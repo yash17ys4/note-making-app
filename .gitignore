@@ -1,0 +1,5 @@
+#untracking node dependencies
+/node_modules
+
+#hiding environment variables
+.env
