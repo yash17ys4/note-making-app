@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const db = require('./config/database');
 require('dotenv').config();
 
@@ -9,6 +10,10 @@ const app = express();
 //middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
+
+//requests for notes
+app.use('/notes', require('./routes/notes'));
 
 //defining PORT number
 var PORT = process.env.PORT || 5000;
