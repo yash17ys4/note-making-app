@@ -12,8 +12,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-//requests for notes
+//requests for notes and users
 app.use('/notes', require('./routes/notes'));
+app.use('/users', require('./routes/users'));
 
 //defining PORT number
 var PORT = process.env.PORT || 5000;
