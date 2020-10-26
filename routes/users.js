@@ -47,7 +47,7 @@ router.post('/signup', (req, res, next) => {
         console.log(err);
     })});
 
-router.post('/login', (req, res) => {
+router.post('/login', jsonParser, (req, res) => {
     Users.findOne({
         where : {
             email: req.body.email

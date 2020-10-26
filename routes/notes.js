@@ -1,4 +1,5 @@
 const express = require('express');
+const checkAuth = require('../middleware/checkAuth');
 const Notes = require('../models/Notes');
 
 const router = express.Router();
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
         .catch(err => console.log(err))}
 );
 
-router.post('/add', (req, res) => {
+router.post('/add', checkAuth, (req, res) => {
     let { id, title, description } = req.body;
     let errors = [];
 
@@ -46,8 +47,7 @@ router.post('/add', (req, res) => {
     }
 });
 
-router.delete('/remove/:id', 
-    (req, res) => {
+router.delete('/remove/:id', checkAuth, (req, res) => {
         const { id } = req.params;
         Notes.destroy({
             where: {
@@ -60,7 +60,7 @@ router.delete('/remove/:id',
         .catch(err => console.log(err));
     });
 
-router.put('/update/:id', (req, res) => {
+router.put('/update/:id', checkAuth, (req, res) => {
         const { id } = req.params;
         const { title, description } = req.body;
         Notes.update(
